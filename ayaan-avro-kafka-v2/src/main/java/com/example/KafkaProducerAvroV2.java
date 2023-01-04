@@ -1,7 +1,9 @@
 package com.example;
 
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
-import org.apache.kafka.clients.producer.*;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-public class KafkaAvroProducerV1 {
+public class KafkaProducerAvroV2 {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         Properties properties = new Properties();
@@ -28,12 +30,13 @@ public class KafkaAvroProducerV1 {
 
         // copied from avro examples
         Customer customer = Customer.newBuilder()
-                .setFirstName("Rohil")
-                .setLastName("Mogal")
+                .setFirstName("Laurel")
+                .setLastName("Newman")
                 .setAge(34)
                 .setHeight(178f)
                 .setWeight(75f)
-                .setAutomatedEmail(false)
+                .setPhoneNumber("123-456-789")
+                .setEmail("laurel.newman@gmail.com")
                 .build();
 
         ProducerRecord<String, Customer> producerRecord = new ProducerRecord<>(
@@ -43,7 +46,7 @@ public class KafkaAvroProducerV1 {
         System.out.println(customer);
         for (int i = 1; i <= 1; i++) {
             producer.send(producerRecord, (metadata, exception) -> {
-                Logger log = LoggerFactory.getLogger(KafkaAvroProducerV1.class);
+                Logger log = LoggerFactory.getLogger(KafkaProducerAvroV2.class);
                 if (exception == null) {
                     System.out.println(metadata);
                 } else {
@@ -57,4 +60,3 @@ public class KafkaAvroProducerV1 {
 
     }
 }
-

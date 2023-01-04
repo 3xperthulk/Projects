@@ -9,14 +9,13 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import java.util.Collections;
 import java.util.Properties;
 
-@SuppressWarnings("ALL")
-public class KafkaAvroConsumerV1 {
+public class KafkaConsumerAvroV2 {
 
     public static void main(String[] args) {
         Properties properties = new Properties();
         // normal consumer
         properties.setProperty("bootstrap.servers","20.232.151.242:19092,20.232.151.242:29092,20.232.151.242:39092");
-        properties.put("group.id", "customer-avro-2");
+        properties.put("group.id", "customer-avro2-v2");
         properties.put("auto.commit.enable", "false");
         properties.put("auto.offset.reset", "earliest");
 
